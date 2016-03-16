@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class FileUploaderController {
-    @RequestMapping(value="/singleUpload")
+//    @RequestMapping(value="/singleUpload")
 
 }
