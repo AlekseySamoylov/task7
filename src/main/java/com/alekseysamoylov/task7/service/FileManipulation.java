@@ -39,8 +39,11 @@ public class FileManipulation {
         return id.toString();
     }
 
-
-    public static void loadFile(String id){
+    /**
+     * Saving file, before search from id
+     * @param id UUID
+     */
+    public static synchronized void loadFile(String id){
         String name = FileMap.getFileName(UUID.fromString(id));
         try (FileOutputStream fileOutputStream = new FileOutputStream(name);
              FileInputStream fileInputStream = new FileInputStream(id)){
@@ -51,6 +54,16 @@ public class FileManipulation {
             e.printStackTrace();
         }
 
+    }
+
+    public static synchronized void deleteFile(String id){
+        try {
+            Path path = Paths.get(id);
+            Files.delete(path);
+            FileMap.deleteId(UUID.fromString(id));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -157,4 +157,8 @@ public class FileMap {
         }
     }
 
+    public static synchronized void deleteId(UUID id){
+        fileMap.remove(id);
+    }
+
 }

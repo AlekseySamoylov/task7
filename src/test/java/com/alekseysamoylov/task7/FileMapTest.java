@@ -51,4 +51,10 @@ public class FileMapTest {
         FileManipulation.loadFile("b5de33fa-2e0b-4ccd-a86e-a16f9b71091f");
 
     }
+
+    @Test
+    public void test5(){
+        FileMap.loadMap();
+        FileManipulation.deleteFile("b5de33fa-2e0b-4ccd-a86e-a16f9b71091f");
+    }
 }
