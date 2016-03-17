@@ -28,8 +28,16 @@ public class FileMapTest {
 //        FileMap.saveMap();
 //        FileMap.fileMap = null;
 //        System.out.println(FileMap.search25Files("fir"));
+//        FileMap.prepareDirectory();
+//        FileMap.saveMap();
         FileMap.loadMap();
-        System.out.println(FileMap.search25Files("q"));
+//        FileMap.addNewFileWithoutId("asdfdasf");
+//        FileMap.saveMap();
+//        FileMap.fileMap = null;
+//        FileMap.loadMap();
+//        System.out.println(FileMap.search25Files("asd"));
+//        System.out.println(FileMap.fileMap);
+
 
     }
 
@@ -41,8 +49,6 @@ public class FileMapTest {
         FileManipulation.addFile(file5);
         System.out.println(FileMap.getPathList());
         FileMap.saveMap();
-
-
     }
 
     @Test
@@ -56,5 +62,13 @@ public class FileMapTest {
     public void test5(){
         FileMap.loadMap();
         FileManipulation.deleteFile("b5de33fa-2e0b-4ccd-a86e-a16f9b71091f");
+    }
+
+    @Test
+    public void test6(){
+        System.out.println(!new File("ROOT/filemap/filemap.ser").exists());
+        FileMap.prepareDirectory();
+        System.out.println(!new File("ROOT/filemap/filemap.ser").exists());
+
     }
 }

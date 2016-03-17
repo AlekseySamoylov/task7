@@ -5,54 +5,30 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
-    <display-name>Task App</display-name>
-    <description>
-        This is a simple web application with a source code organization
-        based on the recommendations of the Application Developer's Guide.
-        Bla-bla-bla...
-    </description>
+    <display-name>Task7 App</display-name>
 
     <welcome-file-list>
         <welcome-file>html/index.html</welcome-file>
     </welcome-file-list>
 
+    <servlet>
+        <servlet-name>LoadServlet</servlet-name>
+        <servlet-class>com.alekseysamoylov.task7.servlets.LoadFiles</servlet-class>
+    </servlet>
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            classpath:META-INF/app-context.xml
-        </param-value>
-    </context-param>
+    <servlet-mapping>
+        <servlet-name>LoadServlet</servlet-name>
+        <url-pattern>/load</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ListServlet</servlet-name>
+        <servlet-class>com.alekseysamoylov.task7.servlets.ListServlet</servlet-class>
+    </servlet>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <!--<servlet>-->
-        <!--<servlet-name>appServlet</servlet-name>-->
-        <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>contextConfigLocation</param-name>-->
-            <!--<param-value>-->
-                <!--classpath:META-INF/app-context.xml-->
-            <!--</param-value>-->
-        <!--</init-param>-->
-        <!--<load-on-startup>1</load-on-startup>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>appServlet</servlet-name>-->
-        <!--<url-pattern>/</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-        <!--<servlet-name>HelloServlet</servlet-name>-->
-        <!--<servlet-class>examples.Hello</servlet-class>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>HelloServlet</servlet-name>-->
-        <!--<url-pattern>/hello</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>ListServlet</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
 
 </web-app>

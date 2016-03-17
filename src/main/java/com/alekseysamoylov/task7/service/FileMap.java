@@ -17,6 +17,10 @@ public class FileMap {
      */
     public static ConcurrentHashMap<UUID, ArrayList<String>> fileMap = new ConcurrentHashMap<>();
 
+    public static final String CONF_FILE_PATH = "ROOT/filemap/filemap.ser";
+    public static final String FILE_PATH = "ROOT/";
+
+
     private FileMap() {
     }
 
@@ -94,6 +98,9 @@ public class FileMap {
     public static synchronized LinkedHashMap<String, UUID> search25Files(String name) {
         LinkedHashMap<String, UUID> findFiles = new LinkedHashMap<>();
         int counter = 1;
+        System.out.println("Search " + name);
+        System.out.println("filemap: " + fileMap);
+
         try {
             for (ConcurrentHashMap.Entry<UUID, ArrayList<String>> entry : fileMap.entrySet()) {
                 for (int i = 0; i < entry.getValue().size(); i++) {
@@ -103,6 +110,8 @@ public class FileMap {
                     }
                 }
             }
+            System.out.println("LIst" + findFiles);
+
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
@@ -117,10 +126,14 @@ public class FileMap {
      * Can remove all your data!!!
      */
     public static void prepareDirectory() {
-        File file = new File("filemap/filemap.ser");
+        File file = new File(CONF_FILE_PATH);
+        file.getParentFile().getParentFile().mkdir();
         file.getParentFile().mkdir();
         try (FileWriter writer = new FileWriter(file)) {
-            System.out.println("ok");
+            if (fileMap.equals(null)){
+                addNewFileWithoutId("test_empty");
+            }
+            System.out.println("ok in prepare");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -131,12 +144,12 @@ public class FileMap {
      * Save list of files exist in our Server in ROOT folder
      */
     public static synchronized void saveMap() {
-        if (!new File("filemap/filemap.ser").exists()) {
-            prepareDirectory();
-        }
-        try (FileOutputStream outputStream = new FileOutputStream("filemap/filemap.ser");
+        try (FileOutputStream outputStream = new FileOutputStream(CONF_FILE_PATH);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream)) {
             objectOutputStream.writeObject(fileMap);
+            System.out.println("I am in SAVING");
+            objectOutputStream.close();
+            outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -146,10 +159,7 @@ public class FileMap {
      * Load resource file with list of files and id.
      */
     public static synchronized void loadMap() {
-        if (!new File("filemap/filemap.ser").exists()) {
-            prepareDirectory();
-        }
-        try (FileInputStream fileInputStream = new FileInputStream("filemap/filemap.ser");
+        try (FileInputStream fileInputStream = new FileInputStream(CONF_FILE_PATH);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             fileMap = (ConcurrentHashMap<UUID, ArrayList<String>>) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -157,6 +167,10 @@ public class FileMap {
         }
     }
 
+    /**
+     * Remove file from system and all alias from file list(Like in your plan)
+     * @param id
+     */
     public static synchronized void deleteId(UUID id){
         fileMap.remove(id);
     }

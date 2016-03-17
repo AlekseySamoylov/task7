@@ -6,17 +6,25 @@
 </head>
 <body>
 <br><br>
-<form action="/upload" method="post" enctype="multipart/form-data">
-    <label for="f1">Upload file to the server</label><br>
-    <input type="file" name="file" id="f1"> <br>
-    <input type="text" name="name" /><br>
-    <input type="submit" value="send to the server"><br><br>
+
+<h1>File uploading service!!!</h1>
+<form method="POST" enctype="multipart/form-data" action="/load">
+    File to upload: <input type="file" name="data"><br />
+    <input type="submit" value="Upload">
+    Press here to upload the file!
 </form>
-<form action="aaa" method="get" enctype="multipart/form-data">
-    <label for="n1">Get file from the Server</label><br>
-    <input type="text" name="name" id="n1"><br>
-    <input type="submit" value="find">
+<br>
+<h1>File Downloading Service!!!</h1><br>
+<form action="/list" method="get" >
+    <input type="text" name="name">
+    <input type="submit" value="Send string to server">
+</form><br>
+<h1>Download file with ID</h1><br>
+<form action="/download" method="get" >
+    <input type="text" name="id">
+    <input type="submit" value="Send id to server">
 </form>
-<p>text message</p>
+
+
 </body>
 </html>
