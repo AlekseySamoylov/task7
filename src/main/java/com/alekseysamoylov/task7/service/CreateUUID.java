@@ -10,9 +10,10 @@ import java.util.UUID;
 public class CreateUUID {
     /**
      * Generate id
+     *
      * @return id
      */
-    public static UUID getUUID(){
+    public static UUID getUUID() {
         return UUID.randomUUID().randomUUID();
     }
 }

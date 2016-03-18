@@ -15,17 +15,19 @@ public class CompareFiles {
 
     /**
      * Check file's existing while content.
+     *
      * @param fileForCheck file for checking
-     * @param pathList list files paths from FileMap class
+     * @param pathList     list files paths from FileMap class
      * @return true if exist or false if doesn't exist.
      */
-    public UUID checkFileExists(File fileForCheck, ArrayList<UUID> pathList){
+    public static synchronized UUID checkFileExists(File fileForCheck, ArrayList<UUID> pathList) {
         UUID id = null;
-        for(int i=0;i<pathList.size();i++){
-            File existFile = new File(pathList.get(i).toString());
+        for (int i = 0; i < pathList.size(); i++) {
+            File existFile = new File(FileMap.FILE_PATH + pathList.get(i).toString());
             try {
-                if(FileUtils.contentEquals(fileForCheck, existFile)){
+                if (FileUtils.contentEquals(fileForCheck, existFile)) {
                     id = pathList.get(i);
+                    System.out.println(" foreach UUID pathes" + pathList.get(i));
                 }
             } catch (IOException e) {
                 e.printStackTrace();

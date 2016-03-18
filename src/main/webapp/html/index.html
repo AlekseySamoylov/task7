@@ -4,27 +4,87 @@
     <meta charset="UTF-8">
     <title>Task 7</title>
 </head>
-<body>
-<br><br>
+<body style="
+      border: 1px solid black;
+      padding: 10px;
+      margin: 30px;
+      font-family: Tahoma;">
+
 
 <h1>File uploading service!!!</h1>
-<form method="POST" enctype="multipart/form-data" action="/load">
-    File to upload: <input type="file" name="data"><br />
+
+<form method="POST" enctype="multipart/form-data" action="/task7/load">
+    <h2>File to upload (5Mb maximum): </h2>
+    <input type="file" name="data"><br/>
     <input type="submit" value="Upload">
-    Press here to upload the file!
+
+    <p>Press here to upload the file!</p>
 </form>
 <br>
-<h1>File Downloading Service!!!</h1><br>
-<form action="/list" method="get" >
-    <input type="text" name="name">
+
+<h2>Search ID form name.</h2><br>
+
+<form action="/task7/list" method="get">
+    <label>Write name or letters or leave it empty and click button, when see 25 founded files<br>
+        <input type="text" name="name">
+    </label>
     <input type="submit" value="Send string to server">
-</form><br>
-<h1>Download file with ID</h1><br>
-<form action="/download" method="get" >
-    <input type="text" name="id">
+</form>
+<p>Click it if you want to see 25 files with names like text in textfield </p>
+<br>
+
+<h2>Download file with ID from Search</h2><br>
+
+<form action="/task7/download" method="get">
+    <label>Past here UUID from Search Service if You wand to download file<br>
+        <input type="text" name="id">
+    </label>
     <input type="submit" value="Send id to server">
 </form>
+<br>
 
+<h2>Delete file with ID</h2><br>
 
+<form action="/task7/delete" method="get">
+    <label>Past here UUID from Search Service if You wand to delete file<br>
+        <input type="text" name="id">
+    </label>
+    <input type="submit" value="Send id to server">
+</form>
+<h2>Задание:</h2>
+
+<p style="
+border: 1px solid black;
+    padding: 10px;
+    margin: 30px;
+    font-family: Calibri;
+    font-size: 140%;">
+    <b>Файловый сервер:</b><br>
+    <br>
+    Приложение, которое обеспечивает пользователям доступ к файлам, которые пользователь сам добавляет на сервер.
+    <br><br>
+    Сервер работает с одной корневой папкой, ко всем файлам которой он должен предоставлять доступ.Каждому файлу сервер
+    должен уметь сопоставлять уникальный идентификатор зависящий только от содержимого файла (т. е. 2 файла с одинаковым
+    содержимым, но разными именами будут иметь одинаковый идентификатор). Считаем, что изначально среди файлов в рабочей
+    директории нет файлов с одинаковым содержимым.
+    <br><br>
+    Список функционала:
+    <br><br>
+    1. <b>Поиск</b> - пользователь передает строку, сервер выполняет поиск среди доступных файлов на вхождение поисковой
+    строки в название файла (опционально - поддержка wildcards). Результат запроса - набор пар имя файла/уникальный
+    идентификатор. Если в результате получается больше 25 пар, то возвращаем только 25 пар.
+    <br><br>
+    2. <b>Скачивание файла</b> - клиент передает уникальный идентификатор файла и получает в ответ от сервера файл с
+    таким идентификатором.
+    <br><br>
+    3. <b>Заливка файла</b> - пользователь передает серверу файл. Сервер присваивает ему идентификатор (на основе
+    содержимого) и сохраняет в рабочую директорию. При этом если файл с таким идентификатором уже существует, то файл не
+    должен быть записан на диск.
+    <br><br>
+    4. <b>Удаление файла</b> - клиент передает идентификатор файла, сервер удаляет файл с таким идентификатор.
+    <br><br>
+    Варианты - web service/web interface/свой протокол на сокетах (реализовать свой клиент).
+
+</p>
 </body>
 </html>

@@ -45,7 +45,7 @@ public class FileManipulation {
     }
 
     /**
-     * Saving file, before search from id
+     * Saving file, after search from id. This for Testing only!!!
      * @param id UUID
      */
     public static synchronized void loadFile(String id){
@@ -61,11 +61,19 @@ public class FileManipulation {
 
     }
 
+    /**
+     * Delete file form server and fileList(all Aliases)
+     * (КАК УКАЗАНО В ЗАДАНИИ! удаляются сразу все ссылки и файл, но я бы сделал, чтобы файл не удалялся, пока есть хоть одна ссылка)
+     * @param id
+     */
     public static synchronized void deleteFile(String id){
         try {
+            System.out.println("Start deleting");
+            System.out.println("Delete all aliases");
+            FileMap.deleteId(UUID.fromString(id));
             Path path = Paths.get(FileMap.FILE_PATH + id);
             Files.delete(path);
-            FileMap.deleteId(UUID.fromString(id));
+            System.out.println("Delete real file");
         } catch (IOException e) {
             e.printStackTrace();
         }
