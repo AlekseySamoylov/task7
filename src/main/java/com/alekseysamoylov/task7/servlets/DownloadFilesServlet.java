@@ -21,8 +21,9 @@ import java.util.UUID;
 public class DownloadFilesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
         FileMap.realPath = getServletContext().getRealPath("/") + "/";
-        String filePath = FileMap.realPath + "/" + FileMap.FILE_PATH + req.getParameter("id");
+        String filePath = FileMap.FILE_PATH + req.getParameter("id");
         String id = req.getParameter("id");
         File file = new File(filePath);
         FileInputStream inputStream = new FileInputStream(file);
